@@ -7,21 +7,21 @@
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4",
-    "@vercel/analytics": "^1",
-    "@vercel/speed-insights": "^1",
+    "@vercel/analytics": "^2",
+    "@vercel/speed-insights": "^2",
     "geist": "^1",
-    "next": "^15",
-    "next-mdx-remote": "^5",
+    "next": "^16",
+    "next-mdx-remote": "^6",
     "postcss": "^8",
     "react": "^19",
     "react-dom": "^19",
-    "sugar-high": "^0.9",
+    "sugar-high": "^1.2",
     "tailwindcss": "^4"
   },
   "devDependencies": {
-    "@types/node": "^22",
+    "@types/node": "^25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "typescript": "^5.7"
+    "typescript": "^6.0"
   }
 }
