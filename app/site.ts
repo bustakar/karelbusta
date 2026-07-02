@@ -10,6 +10,8 @@ export const site = {
   links: {
     youtube: 'https://www.youtube.com/@karelbusta',
     x: 'https://x.com/karelbusta',
+    instagram: 'https://www.instagram.com/karelbusta',
+    tiktok: 'https://www.tiktok.com/@karelbusta',
     github: 'https://github.com/bustakar',
     discord: 'https://discord.gg/jP659hG7',
     // TODO(karel): confirm these — tech stack + sponsor destinations
@@ -19,13 +21,15 @@ export const site = {
 };
 
 export const apps = [
-  { name: 'Kinetic', icon: '/apps/kinetic.png', href: 'https://github.com/bustakar/kinetic' },
+  { name: 'Kinetic', icon: '/apps/kinetic.svg', href: 'https://github.com/bustakar/kinetic' },
 ] as const;
 
-// "my socials" — where I post regularly (YouTube + X)
+// "my socials" — where I post regularly
 export const socials = [
-  { key: 'youtube', href: site.links.youtube, label: 'YouTube' },
-  { key: 'x', href: site.links.x, label: 'X' },
+  { key: 'youtube', href: site.links.youtube, label: 'YouTube', icon: '/logos/youtube.svg' },
+  { key: 'x', href: site.links.x, label: 'X', icon: '/logos/x.svg' },
+  { key: 'instagram', href: site.links.instagram, label: 'Instagram', icon: '/logos/instagram.svg' },
+  { key: 'tiktok', href: site.links.tiktok, label: 'TikTok', icon: '/logos/tiktok.svg' },
 ] as const;
 
 export type Locale = 'cs' | 'en';
@@ -180,7 +184,14 @@ export function personJsonLd(locale: Locale) {
           'SwiftUI',
           'Mobile apps',
         ],
-        sameAs: [site.links.youtube, site.links.x, site.links.github, site.links.discord],
+        sameAs: [
+          site.links.youtube,
+          site.links.x,
+          site.links.instagram,
+          site.links.tiktok,
+          site.links.github,
+          site.links.discord,
+        ],
       },
       ...apps.map((app) => ({
         '@type': 'SoftwareApplication',

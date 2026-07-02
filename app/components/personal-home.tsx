@@ -40,8 +40,12 @@ export function PersonalHome({ locale }: { locale: Locale }) {
                   const isLast = j === stanza.lines.length - 1;
                   return (
                     <span className="text-line" key={j}>
-                      {line}
-                      {isLast && (
+                      {isLast && stanza.trailing === 'avatar' ? (
+                        <InlineAvatarLine line={line} />
+                      ) : (
+                        line
+                      )}
+                      {isLast && stanza.trailing !== 'avatar' && (
                         <>
                           {' '}
                           <TrailingIcons kind={stanza.trailing} content={content} />
@@ -72,6 +76,25 @@ export function PersonalHome({ locale }: { locale: Locale }) {
           </div>
         </main>
       </div>
+    </>
+  );
+}
+
+function InlineAvatarLine({ line }: { line: string }) {
+  const marker = 'Karel,';
+  const index = line.indexOf(marker);
+
+  if (index === -1) {
+    return line;
+  }
+
+  return (
+    <>
+      {line.slice(0, index + marker.length)}
+      {' '}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="avatar inline-avatar" src={site.avatarUrl} alt={site.name} width={40} height={40} />
+      {line.slice(index + marker.length)}
     </>
   );
 }
@@ -125,7 +148,8 @@ function TrailingIcons({
             title={s.label}
             aria-label={s.label}
           >
-            <BrandLogo name={s.key} />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={s.icon} alt="" width={24} height={24} />
           </a>
         ))}
       </span>
@@ -143,43 +167,10 @@ function TrailingIcons({
         title="Discord"
         aria-label="Discord"
       >
-        <BrandLogo name="discord" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/logos/discord.svg" alt="" width={24} height={24} />
       </a>
     </span>
-  );
-}
-
-function BrandLogo({ name }: { name: 'youtube' | 'x' | 'discord' }) {
-  if (name === 'youtube') {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <rect width="24" height="24" rx="5" fill="#FF0000" />
-        <path
-          fill="#fff"
-          d="M9.5 7.5v9l7.4-4.5-7.4-4.5Z"
-        />
-      </svg>
-    );
-  }
-  if (name === 'x') {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <rect width="24" height="24" rx="5" fill="#000" />
-        <path
-          fill="#fff"
-          d="M17.53 5h2.02l-4.4 5.03L20.35 19h-4.06l-3.18-4.16L9.47 19H7.45l4.7-5.38L6.65 5h4.16l2.88 3.8L17.53 5Zm-.71 12.78h1.12L9.9 6.14H8.7l8.11 11.64Z"
-        />
-      </svg>
-    );
-  }
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <rect width="24" height="24" rx="5" fill="#5865F2" />
-      <path
-        fill="#fff"
-        d="M17.7 7.2a12 12 0 0 0-3-.93l-.15.3a11 11 0 0 1 2.66 1.06 10.4 10.4 0 0 0-8.42 0 11 11 0 0 1 2.66-1.06l-.15-.3c-1.05.18-2.06.5-3 .93-1.9 2.8-2.42 5.55-2.16 8.26A12.1 12.1 0 0 0 6.6 17.3l.45-.63a7.8 7.8 0 0 1-1.18-.57l.28-.21a7.4 7.4 0 0 0 6.3.05l.29.21c-.37.22-.77.41-1.19.57l.46.63a12 12 0 0 0 3.67-1.84c.31-3.14-.52-5.87-2.18-8.26ZM9.68 13.9c-.72 0-1.3-.66-1.3-1.47 0-.8.57-1.46 1.3-1.46s1.31.66 1.3 1.46c0 .81-.58 1.47-1.3 1.47Zm4.64 0c-.72 0-1.3-.66-1.3-1.47 0-.8.57-1.46 1.3-1.46s1.31.66 1.3 1.46c0 .81-.57 1.47-1.3 1.47Z"
-      />
-    </svg>
   );
 }
 

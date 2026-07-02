@@ -1,0 +1,18 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(256 256) rotate(90) scale(256)">
+      <stop stop-color="#2E1A1F"/>
+      <stop offset="1" stop-color="#2A1F3D"/>
+    </radialGradient>
+    <filter id="shadow" x="38" y="149" width="436" height="214" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.32"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="108" fill="url(#bg)"/>
+  <g filter="url(#shadow)">
+    <circle cx="156" cy="256" r="56" fill="#E17858" fill-opacity="0.25"/>
+    <circle cx="223" cy="256" r="56" fill="#E17858" fill-opacity="0.25"/>
+    <circle cx="290" cy="256" r="56" fill="#E17858" fill-opacity="0.25"/>
+    <circle cx="356" cy="256" r="56" fill="#E17858"/>
+  </g>
+</svg>

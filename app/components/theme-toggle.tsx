@@ -1,61 +1,97 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 
 type Resolved = 'light' | 'dark';
+type ThemeMode = 'system' | Resolved;
 
 function systemTheme(): Resolved {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
-function apply(resolved: Resolved) {
+function resolve(mode: ThemeMode): Resolved {
+  return mode === 'system' ? systemTheme() : mode;
+}
+
+function apply(mode: ThemeMode) {
+  const resolved = resolve(mode);
   const root = document.documentElement;
   root.dataset.theme = resolved;
+  root.dataset.themeMode = mode;
   root.style.colorScheme = resolved;
 }
 
 export function ThemeToggle({ label }: { label: string }) {
-  // null until mounted, so SSR markup stays stable (icon renders after hydration)
-  const [resolved, setResolved] = useState<Resolved | null>(null);
+  const [mode, setMode] = useState<ThemeMode>('system');
 
   useEffect(() => {
     const stored = window.localStorage.getItem('theme-mode');
-    const initial: Resolved =
-      stored === 'light' || stored === 'dark' ? stored : systemTheme();
-    setResolved(initial);
+    const initial: ThemeMode =
+      stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'system';
+    setMode(initial);
     apply(initial);
 
-    // While the user hasn't chosen explicitly, follow the system.
     const media = window.matchMedia('(prefers-color-scheme: dark)');
     const onChange = () => {
-      if (!window.localStorage.getItem('theme-mode')) {
-        const next = systemTheme();
-        setResolved(next);
-        apply(next);
+      const current = window.localStorage.getItem('theme-mode') || 'system';
+      if (current === 'system') {
+        apply('system');
       }
     };
     media.addEventListener('change', onChange);
     return () => media.removeEventListener('change', onChange);
   }, []);
 
-  function toggle() {
-    const next: Resolved = resolved === 'dark' ? 'light' : 'dark';
-    setResolved(next);
+  function choose(next: ThemeMode) {
+    setMode(next);
     window.localStorage.setItem('theme-mode', next);
     apply(next);
   }
 
   return (
-    <button
-      type="button"
-      className="theme-toggle"
-      onClick={toggle}
-      aria-label={label}
-      title={label}
-    >
-      {/* Show the icon for the mode you'll switch TO. */}
-      {resolved === 'dark' ? <SunIcon /> : <MoonIcon />}
+    <div className="theme-toggle" aria-label={label} title={label} role="group">
+      <ThemeButton
+        active={mode === 'system'}
+        label="System theme"
+        onClick={() => choose('system')}
+      >
+        <SystemIcon />
+      </ThemeButton>
+      <ThemeButton active={mode === 'light'} label="Light theme" onClick={() => choose('light')}>
+        <SunIcon />
+      </ThemeButton>
+      <ThemeButton active={mode === 'dark'} label="Dark theme" onClick={() => choose('dark')}>
+        <MoonIcon />
+      </ThemeButton>
+    </div>
+  );
+}
+
+function ThemeButton({
+  active,
+  children,
+  label,
+  onClick,
+}: {
+  active: boolean;
+  children: ReactNode;
+  label: string;
+  onClick: () => void;
+}) {
+  return (
+    <button type="button" aria-label={label} aria-pressed={active} onClick={onClick}>
+      {children}
     </button>
+  );
+}
+
+function SystemIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="4" y="5" width="16" height="11" rx="2" />
+      <path d="M9 20h6M12 16v4" />
+    </svg>
   );
 }
 

@@ -111,18 +111,46 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 5px;
   border: 0;
   border-radius: 7px;
+  background: transparent;
+  color: var(--muted);
+}
+
+.lang-switch {
+  padding: 5px;
+}
+
+.theme-toggle {
+  gap: 2px;
+  padding: 2px;
+  background: var(--soft);
+}
+
+.theme-toggle button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
   background: transparent;
   color: var(--muted);
   cursor: pointer;
 }
 
-.lang-switch:hover,
-.theme-toggle:hover {
+.lang-switch:hover {
   color: var(--ink);
   background: var(--soft);
+}
+
+.theme-toggle button:hover,
+.theme-toggle button[aria-pressed='true'] {
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
 }
 
 .flag {
@@ -147,8 +175,8 @@ a {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 56px 0 88px;
+  justify-content: flex-start;
+  padding: 86px 0 88px;
 }
 
 .intro {
@@ -182,6 +210,11 @@ a {
   box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
 }
 
+.inline-avatar {
+  margin: 0 0.06em;
+  vertical-align: -0.28em;
+}
+
 /* trailing cluster of app icons / brand logos */
 .cluster {
   display: inline-flex;
@@ -209,14 +242,50 @@ a {
   object-fit: cover;
 }
 
-.logo-chip svg {
-  width: 100%;
-  height: 100%;
-  display: block;
+.logo-chip {
+  background: #111111;
 }
 
-.logo-chip .gh {
-  fill: var(--ink);
+.logo-chip[title='YouTube'] {
+  background: #ff0000;
+}
+
+.logo-chip[title='X'],
+.logo-chip[title='TikTok'] {
+  background: #000000;
+}
+
+.logo-chip[title='Discord'] {
+  background: #5865f2;
+}
+
+.logo-chip[title='Instagram'] {
+  background:
+    radial-gradient(circle at 30% 105%, #fdf497 0 12%, #fd5949 33%, transparent 58%),
+    radial-gradient(circle at 30% 107%, #fd5949 0 38%, transparent 63%),
+    linear-gradient(135deg, #405de6 0%, #833ab4 36%, #c13584 58%, #e1306c 78%, #fd1d1d 100%);
+}
+
+.logo-chip img {
+  width: 58%;
+  height: 58%;
+  display: block;
+  object-fit: contain;
+}
+
+.logo-chip[title='YouTube'] img {
+  width: 62%;
+  height: 62%;
+}
+
+.logo-chip[title='Discord'] img {
+  width: 64%;
+  height: 64%;
+}
+
+.logo-chip[title='TikTok'] img {
+  width: 56%;
+  height: 56%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
