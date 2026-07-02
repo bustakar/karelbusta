@@ -21,7 +21,11 @@ export const site = {
 };
 
 export const apps = [
-  { name: 'Kinetic', icon: '/apps/kinetic.png', href: 'https://github.com/bustakar/kinetic' },
+  {
+    name: 'Kinetic',
+    icon: '/apps/kinetic.png',
+    href: 'https://apps.apple.com/us/app/kinetic-workout-tracker/id6761449962',
+  },
 ] as const;
 
 // "my socials" — where I post regularly
@@ -67,9 +71,9 @@ export const localeContent: Record<Locale, LocaleContent> = {
     langLabel: 'Přepnout do angličtiny',
     themeLabel: 'Přepnout barevný režim',
     seo: {
-      title: 'Karel Busta — AI, appky a agentic workflows',
+      title: 'Karel Busta - software engineer z Česka',
       description:
-        'Karel Busta je software engineer z Česka. Staví mobilní appky, tráví až moc času s AI a pravidelně o tom postuje na sockách.',
+        'Osobní web Karla Busty, software engineera z Česka. Staví mobilní appky, sdílí praktickou práci online a vede Discord komunitu.',
     },
     intro: [
       { lines: ['Ahoj, jsem Karel, software engineer z Česka'], trailing: 'avatar' },
@@ -98,9 +102,9 @@ export const localeContent: Record<Locale, LocaleContent> = {
     langLabel: 'Switch to Czech',
     themeLabel: 'Change color theme',
     seo: {
-      title: 'Karel Busta — AI, apps, and agentic workflows',
+      title: 'Karel Busta - Software Engineer from Czechia',
       description:
-        'Karel Busta is a software engineer from Czechia. He builds mobile apps, spends too much time with AI, and posts about it regularly.',
+        'Personal website of Karel Busta, a software engineer from Czechia building mobile apps, sharing practical work online, and running a Discord community.',
     },
     intro: [
       { lines: ['Hi, I’m Karel, a software engineer from Czechia'], trailing: 'avatar' },
@@ -129,7 +133,7 @@ export function metadataForLocale(locale: Locale): Metadata {
   const ogUrl = `${site.baseUrl}/og?locale=${locale}`;
 
   return {
-    title: content.seo.title,
+    title: { absolute: content.seo.title },
     description: content.seo.description,
     alternates: {
       canonical: content.url,

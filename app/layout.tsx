@@ -10,11 +10,11 @@ import { localeContent, site } from './site';
 export const metadata: Metadata = {
   metadataBase: new URL(site.baseUrl),
   title: {
-    default: 'Karel Busta - AI, app development, and agentic workflows',
+    default: 'Karel Busta - Software Engineer from Czechia',
     template: '%s | Karel Busta',
   },
   description:
-    'Karel Busta is a software engineer from Czechia creating videos and posts about AI, agentic workflows, app development, and mobile products.',
+    'Personal website of Karel Busta, a software engineer from Czechia building mobile apps and sharing practical work online.',
   applicationName: 'Karel Busta',
   authors: [{ name: 'Karel Busta', url: site.englishUrl }],
   creator: 'Karel Busta',
@@ -29,9 +29,9 @@ export const metadata: Metadata = {
     apple: [{ url: '/avatar.png', type: 'image/png' }],
   },
   openGraph: {
-    title: 'Karel Busta - AI, app development, and agentic workflows',
+    title: 'Karel Busta - Software Engineer from Czechia',
     description:
-      'Software engineer from Czechia creating videos and posts about AI, agentic workflows, app development, and mobile products.',
+      'Personal website of Karel Busta, a software engineer from Czechia building mobile apps and sharing practical work online.',
     url: site.englishUrl,
     siteName: 'Karel Busta',
     locale: 'en_US',
