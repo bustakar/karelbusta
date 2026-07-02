@@ -324,27 +324,19 @@ a {
   fill: currentColor;
 }
 
+.stack-icon img {
+  width: 72%;
+  height: 72%;
+  display: block;
+  object-fit: contain;
+}
+
 .stack-icon-claude-code {
   background: #d97757;
 }
 
 .stack-icon-codex {
   background: #111111;
-}
-
-.stack-icon-codex svg {
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.stack-icon-codex circle {
-  stroke-width: 1.9;
-}
-
-.stack-icon-codex path {
-  stroke-width: 1.55;
 }
 
 .stack-icon-vercel {
@@ -372,21 +364,7 @@ a {
 }
 
 .stack-icon-swiftui {
-  background: linear-gradient(135deg, #0a84ff 0%, #5e5ce6 42%, #bf5af2 100%);
-}
-
-.stack-icon-swiftui svg {
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.5;
-}
-
-.stack-icon-swiftui rect {
-  fill: rgb(255 255 255 / 0.14);
-  stroke: currentColor;
-  stroke-width: 1.2;
+  background: #f5f5f5;
 }
 
 .stack-icon-point-free-co-github {
