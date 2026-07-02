@@ -147,7 +147,7 @@ function TrailingIcons({
   );
 }
 
-function Flag({ name }: { name: 'cz' | 'gb' }) {
+export function Flag({ name }: { name: 'cz' | 'gb' }) {
   if (name === 'cz') {
     return (
       <svg viewBox="0 0 24 16" className="flag" aria-hidden="true">

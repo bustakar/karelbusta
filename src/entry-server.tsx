@@ -1,6 +1,6 @@
 import { renderToString } from 'react-dom/server';
 import { App, routes, type Route } from './App';
-import { localeContent, metadataForLocale, site } from './site';
+import { localeContent, metadataForPage, site, stackContent } from './site';
 
 export { routes };
 
@@ -31,7 +31,9 @@ function escapeHtml(value: string) {
 
 function renderHead(route: Route, assetTags: string) {
   const content = localeContent[route.locale];
-  const metadata = metadataForLocale(route.locale);
+  const metadata = metadataForPage(route.locale, route.page);
+  const alternateCs = route.page === 'stack' ? stackContent.cs.url : site.czechUrl;
+  const alternateEn = route.page === 'stack' ? stackContent.en.url : site.englishUrl;
   const title = route.status === 404 ? `Page not found | ${site.name}` : metadata.title;
   const description =
     route.status === 404 ? 'The requested page could not be found.' : metadata.description;
@@ -49,9 +51,9 @@ function renderHead(route: Route, assetTags: string) {
     <meta name="publisher" content="${escapeHtml(site.name)}" />
     <meta name="robots" content="${route.status === 404 ? 'noindex,follow' : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'}" />
     <link rel="canonical" href="${escapeHtml(canonical)}" />
-    <link rel="alternate" hreflang="cs" href="${escapeHtml(site.czechUrl)}" />
-    <link rel="alternate" hreflang="en" href="${escapeHtml(site.englishUrl)}" />
-    <link rel="alternate" hreflang="x-default" href="${escapeHtml(site.englishUrl)}" />
+    <link rel="alternate" hreflang="cs" href="${escapeHtml(alternateCs)}" />
+    <link rel="alternate" hreflang="en" href="${escapeHtml(alternateEn)}" />
+    <link rel="alternate" hreflang="x-default" href="${escapeHtml(alternateEn)}" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="/avatar.png" />

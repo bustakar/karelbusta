@@ -72,6 +72,18 @@ await fs.writeFile(
     <xhtml:link rel="alternate" hreflang="en" href="https://karelbusta.dev/en" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://karelbusta.dev/en" />
   </url>
+  <url>
+    <loc>https://karelbusta.cz/stack</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://karelbusta.cz/stack" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://karelbusta.dev/en/stack" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://karelbusta.dev/en/stack" />
+  </url>
+  <url>
+    <loc>https://karelbusta.dev/en/stack</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://karelbusta.cz/stack" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://karelbusta.dev/en/stack" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://karelbusta.dev/en/stack" />
+  </url>
 </urlset>
 `,
 );
