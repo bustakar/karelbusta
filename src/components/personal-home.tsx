@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import {
   apps,
   localeContent,
@@ -7,7 +6,7 @@ import {
   site,
   type Locale,
   type Trailing,
-} from 'app/site';
+} from '../site';
 import { ThemeToggle } from './theme-toggle';
 
 export function PersonalHome({ locale }: { locale: Locale }) {
@@ -21,14 +20,14 @@ export function PersonalHome({ locale }: { locale: Locale }) {
       />
       <div className="page">
         <header className="controls" aria-label="Preferences">
-          <Link
+          <a
             href={content.switchHref}
             className="lang-switch"
             aria-label={content.langLabel}
             title={content.langLabel}
           >
             <Flag name={content.switchFlag} />
-          </Link>
+          </a>
           <ThemeToggle label={content.themeLabel} />
         </header>
 
@@ -86,7 +85,6 @@ function TrailingIcons({
 }) {
   if (kind === 'avatar') {
     return (
-      // eslint-disable-next-line @next/next/no-img-element
       <img className="avatar" src={site.avatarUrl} alt={site.name} width={40} height={40} />
     );
   }
@@ -104,7 +102,6 @@ function TrailingIcons({
             rel="noopener noreferrer"
             title={app.name}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={app.icon} alt={app.name} width={30} height={30} />
           </a>
         ))}
@@ -126,7 +123,6 @@ function TrailingIcons({
             title={s.label}
             aria-label={s.label}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={s.icon} alt="" width={24} height={24} />
           </a>
         ))}
@@ -145,7 +141,6 @@ function TrailingIcons({
         title="Discord"
         aria-label="Discord"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/logos/discord.svg" alt="" width={24} height={24} />
       </a>
     </span>

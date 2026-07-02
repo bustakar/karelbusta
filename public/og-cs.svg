@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#fbfaf6"/>
+  <rect x="56" y="56" width="1088" height="518" rx="42" fill="#ffffff" stroke="#ded9cf"/>
+  <text x="96" y="130" fill="#141414" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700">KB</text>
+  <text x="1036" y="130" fill="#6f6a61" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">CZ</text>
+  <text x="96" y="316" fill="#141414" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="800">Karel Busta</text>
+  <text x="96" y="390" fill="#2c2925" font-family="Arial, Helvetica, sans-serif" font-size="36">Software engineer z Ceska</text>
+  <text x="96" y="450" fill="#2c2925" font-family="Arial, Helvetica, sans-serif" font-size="30">Mobilni appky, prakticka prace s AI a komunita.</text>
+  <text x="96" y="526" fill="#2563eb" font-family="Arial, Helvetica, sans-serif" font-size="26">youtube.com/@karelbusta - x.com/karelbusta</text>
+</svg>

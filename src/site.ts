@@ -1,5 +1,3 @@
-import type { Metadata } from 'next';
-
 export const site = {
   name: 'Karel Busta',
   baseUrl: 'https://karelbusta.dev',
@@ -128,38 +126,26 @@ export const localeContent: Record<Locale, LocaleContent> = {
   },
 };
 
-export function metadataForLocale(locale: Locale): Metadata {
+export type SeoMetadata = {
+  title: string;
+  description: string;
+  canonical: string;
+  locale: string;
+  alternateLocale: string;
+  ogImage: string;
+};
+
+export function metadataForLocale(locale: Locale): SeoMetadata {
   const content = localeContent[locale];
-  const ogUrl = `${site.baseUrl}/og?locale=${locale}`;
+  const ogUrl = `${site.baseUrl}/og-${locale}.svg`;
 
   return {
-    title: { absolute: content.seo.title },
+    title: content.seo.title,
     description: content.seo.description,
-    alternates: {
-      canonical: content.url,
-      languages: {
-        cs: site.czechUrl,
-        en: site.englishUrl,
-        'x-default': site.englishUrl,
-      },
-    },
-    openGraph: {
-      title: content.seo.title,
-      description: content.seo.description,
-      url: content.url,
-      siteName: site.name,
-      locale: locale === 'cs' ? 'cs_CZ' : 'en_US',
-      alternateLocale: locale === 'cs' ? 'en_US' : 'cs_CZ',
-      type: 'profile',
-      images: [{ url: ogUrl, width: 1200, height: 630, alt: content.seo.title }],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      creator: '@karelbusta',
-      title: content.seo.title,
-      description: content.seo.description,
-      images: [ogUrl],
-    },
+    canonical: content.url,
+    locale: locale === 'cs' ? 'cs_CZ' : 'en_US',
+    alternateLocale: locale === 'cs' ? 'en_US' : 'cs_CZ',
+    ogImage: ogUrl,
   };
 }
 

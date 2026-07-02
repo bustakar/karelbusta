@@ -1,27 +1,26 @@
 {
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "vite",
+    "build": "vite build && vite build --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs",
+    "preview": "vite preview --outDir dist/client"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4",
     "@vercel/analytics": "^1",
     "@vercel/speed-insights": "^1",
-    "geist": "^1",
-    "next": "^15",
-    "next-mdx-remote": "^5",
-    "postcss": "^8",
+    "postcss": "^8.5.16",
     "react": "^19",
     "react-dom": "^19",
-    "sugar-high": "^0.9",
     "tailwindcss": "^4"
   },
   "devDependencies": {
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "typescript": "^5.7"
+    "@vitejs/plugin-react": "^6.0.3",
+    "typescript": "^5.9.3",
+    "vite": "^8.1.3"
   }
 }
