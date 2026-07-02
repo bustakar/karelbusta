@@ -66,12 +66,6 @@ type StackContent = {
   langLabel: string;
   themeLabel: string;
   seo: { title: string; description: string };
-  lines: string[];
-  groups: {
-    label: string;
-    tools: { name: string; href?: string }[];
-  }[];
-  ctas: { label: string; action: string; href: string }[];
 };
 
 export const localeContent: Record<Locale, LocaleContent> = {
@@ -90,7 +84,7 @@ export const localeContent: Record<Locale, LocaleContent> = {
         'Osobní web Karla Busty, software engineera z Česka. Staví mobilní appky, sdílí praktickou práci online a vede Discord komunitu.',
     },
     intro: [
-      { lines: ['Ahoj, jsem Karel,', 'software engineer z Česka'], trailing: 'avatar' },
+      { lines: ['Ahoj, jsem Karel, software engineer z Česka'], trailing: 'avatar' },
       {
         lines: ['Nejspíš trávím až moc času s AI', 'a pravidelně o tom postuju na sockách'],
         trailing: 'socials',
@@ -121,7 +115,7 @@ export const localeContent: Record<Locale, LocaleContent> = {
         'Personal website of Karel Busta, a software engineer from Czechia building mobile apps, sharing practical work online, and running a Discord community.',
     },
     intro: [
-      { lines: ['Hi, I’m Karel,', 'a software engineer from Czechia'], trailing: 'avatar' },
+      { lines: ['Hi, I’m Karel, a software engineer from Czechia'], trailing: 'avatar' },
       {
         lines: ['I probably spend too much time with AI,', 'and I post about it regularly on my socials'],
         trailing: 'socials',
@@ -155,53 +149,6 @@ export const stackContent: Record<Locale, StackContent> = {
       description:
         'Tech stack Karla Busty: nástroje pro web, iOS, AI workflow, design a publikování.',
     },
-    lines: [
-      'Můj stack je záměrně malý.',
-      'Věci měním rychle, ale tyhle nástroje používám pořád.',
-    ],
-    groups: [
-      {
-        label: 'Web',
-        tools: [
-          { name: 'Bun', href: 'https://bun.sh' },
-          { name: 'Vite', href: 'https://vite.dev' },
-          { name: 'React', href: 'https://react.dev' },
-          { name: 'TypeScript', href: 'https://www.typescriptlang.org' },
-          { name: 'Tailwind CSS', href: 'https://tailwindcss.com' },
-        ],
-      },
-      {
-        label: 'Appky',
-        tools: [
-          { name: 'Swift', href: 'https://www.swift.org' },
-          { name: 'SwiftUI', href: 'https://developer.apple.com/xcode/swiftui/' },
-          { name: 'Xcode', href: 'https://developer.apple.com/xcode/' },
-          { name: 'TestFlight', href: 'https://developer.apple.com/testflight/' },
-        ],
-      },
-      {
-        label: 'AI workflow',
-        tools: [
-          { name: 'Codex', href: 'https://openai.com/codex' },
-          { name: 'Claude Code', href: 'https://www.anthropic.com/claude-code' },
-          { name: 'Cursor', href: 'https://cursor.com' },
-          { name: 'GitHub', href: site.links.github },
-        ],
-      },
-      {
-        label: 'Publikování',
-        tools: [
-          { name: 'YouTube', href: site.links.youtube },
-          { name: 'X', href: site.links.x },
-          { name: 'Instagram', href: site.links.instagram },
-          { name: 'TikTok', href: site.links.tiktok },
-        ],
-      },
-    ],
-    ctas: [
-      { label: 'Chceš vidět, co s tím stavím?', action: 'Zpátky domů', href: '/' },
-      { label: 'Chceš pokecat o stacku?', action: 'Přidej se na Discord', href: site.links.discord },
-    ],
   },
   en: {
     path: '/en/stack',
@@ -215,53 +162,6 @@ export const stackContent: Record<Locale, StackContent> = {
       description:
         'Karel Busta tech stack: tools for web, iOS, AI workflow, design, and publishing.',
     },
-    lines: [
-      'My stack is intentionally small.',
-      'I change things fast, but these are the tools I keep reaching for.',
-    ],
-    groups: [
-      {
-        label: 'Web',
-        tools: [
-          { name: 'Bun', href: 'https://bun.sh' },
-          { name: 'Vite', href: 'https://vite.dev' },
-          { name: 'React', href: 'https://react.dev' },
-          { name: 'TypeScript', href: 'https://www.typescriptlang.org' },
-          { name: 'Tailwind CSS', href: 'https://tailwindcss.com' },
-        ],
-      },
-      {
-        label: 'Apps',
-        tools: [
-          { name: 'Swift', href: 'https://www.swift.org' },
-          { name: 'SwiftUI', href: 'https://developer.apple.com/xcode/swiftui/' },
-          { name: 'Xcode', href: 'https://developer.apple.com/xcode/' },
-          { name: 'TestFlight', href: 'https://developer.apple.com/testflight/' },
-        ],
-      },
-      {
-        label: 'AI workflow',
-        tools: [
-          { name: 'Codex', href: 'https://openai.com/codex' },
-          { name: 'Claude Code', href: 'https://www.anthropic.com/claude-code' },
-          { name: 'Cursor', href: 'https://cursor.com' },
-          { name: 'GitHub', href: site.links.github },
-        ],
-      },
-      {
-        label: 'Publishing',
-        tools: [
-          { name: 'YouTube', href: site.links.youtube },
-          { name: 'X', href: site.links.x },
-          { name: 'Instagram', href: site.links.instagram },
-          { name: 'TikTok', href: site.links.tiktok },
-        ],
-      },
-    ],
-    ctas: [
-      { label: 'Want to see what I build with it?', action: 'Back home', href: '/en' },
-      { label: 'Want to talk about the stack?', action: 'Join my Discord', href: site.links.discord },
-    ],
   },
 };
 

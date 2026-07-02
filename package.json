@@ -13,6 +13,7 @@
     "postcss": "^8.5.16",
     "react": "^19",
     "react-dom": "^19",
+    "simple-icons": "^16.24.1",
     "tailwindcss": "^4"
   },
   "devDependencies": {

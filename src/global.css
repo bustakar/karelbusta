@@ -185,7 +185,7 @@ a {
 }
 
 .avatar {
-  display: block;
+  display: inline-block;
   flex: 0 0 auto;
   width: 1.38em;
   height: 1.38em;
@@ -312,68 +312,85 @@ a {
   text-underline-offset: 3px;
 }
 
-.stack-intro {
-  margin-bottom: 2.2em;
+.stack-icon {
+  background: #111111;
+  color: #ffffff;
 }
 
-.stack-kicker {
-  margin: 0 0 1.1em;
-  color: var(--muted);
-  font-size: clamp(15px, 2vw, 17px);
-  line-height: 1.4;
+.stack-icon svg {
+  width: 58%;
+  height: 58%;
+  display: block;
+  fill: currentColor;
 }
 
-.stack-line {
-  margin-bottom: 0.55em;
+.stack-icon-claude-code {
+  background: #d97757;
 }
 
-.stack-list {
-  width: min(100%, 820px);
+.stack-icon-codex {
+  background: #111111;
 }
 
-.stack-row {
-  display: grid;
-  grid-template-columns: minmax(96px, 0.28fr) 1fr;
-  gap: 18px;
-  padding: 22px 0;
-  border-top: 1px solid var(--line);
+.stack-icon-codex svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.stack-row:last-child {
-  border-bottom: 1px solid var(--line);
+.stack-icon-codex circle {
+  stroke-width: 1.9;
 }
 
-.stack-row h2 {
-  margin: 0;
-  color: var(--muted);
-  font-size: clamp(15px, 2vw, 17px);
-  font-weight: 400;
-  line-height: 1.4;
+.stack-icon-codex path {
+  stroke-width: 1.55;
 }
 
-.stack-tools {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.stack-icon-vercel {
+  background: #000000;
 }
 
-.stack-tool {
-  display: inline-flex;
-  align-items: center;
-  min-height: 34px;
-  padding: 5px 12px;
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  background: var(--surface);
-  color: var(--ink);
-  font-size: clamp(15px, 2vw, 17px);
-  line-height: 1.25;
-  text-decoration: none;
+.stack-icon-ghostty {
+  background: #7c3aed;
 }
 
-a.stack-tool:hover {
-  border-color: color-mix(in srgb, var(--ink) 34%, var(--line));
-  background: var(--soft);
+.stack-icon-helium {
+  background: #22c55e;
+}
+
+.stack-icon-posthog {
+  background: #f54e00;
+}
+
+.stack-icon-sentry {
+  background: #362d59;
+}
+
+.stack-icon-swift {
+  background: #f05138;
+}
+
+.stack-icon-swiftui {
+  background: linear-gradient(135deg, #0a84ff 0%, #5e5ce6 42%, #bf5af2 100%);
+}
+
+.stack-icon-swiftui svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
+}
+
+.stack-icon-swiftui rect {
+  fill: rgb(255 255 255 / 0.14);
+  stroke: currentColor;
+  stroke-width: 1.2;
+}
+
+.stack-icon-point-free-co-github {
+  background: #181717;
 }
 
 @media (max-width: 600px) {
@@ -386,11 +403,6 @@ a.stack-tool:hover {
   .home {
     justify-content: flex-start;
     padding-top: 40px;
-  }
-  .stack-row {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    padding: 20px 0;
   }
 }
 
