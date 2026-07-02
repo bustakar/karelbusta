@@ -69,7 +69,7 @@ export const localeContent: Record<Locale, LocaleContent> = {
     langLabel: 'Přepnout do angličtiny',
     themeLabel: 'Přepnout barevný režim',
     seo: {
-      title: 'Karel Busta - software engineer z Česka',
+      title: 'Karel Busta',
       description:
         'Osobní web Karla Busty, software engineera z Česka. Staví mobilní appky, sdílí praktickou práci online a vede Discord komunitu.',
     },
@@ -100,7 +100,7 @@ export const localeContent: Record<Locale, LocaleContent> = {
     langLabel: 'Switch to Czech',
     themeLabel: 'Change color theme',
     seo: {
-      title: 'Karel Busta - Software Engineer from Czechia',
+      title: 'Karel Busta',
       description:
         'Personal website of Karel Busta, a software engineer from Czechia building mobile apps, sharing practical work online, and running a Discord community.',
     },
