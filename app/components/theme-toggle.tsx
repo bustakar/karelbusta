@@ -1,6 +1,5 @@
 'use client';
 
-import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 
 type Resolved = 'light' | 'dark';
@@ -49,39 +48,24 @@ export function ThemeToggle({ label }: { label: string }) {
     apply(next);
   }
 
-  return (
-    <div className="theme-toggle" aria-label={label} title={label} role="group">
-      <ThemeButton
-        active={mode === 'system'}
-        label="System theme"
-        onClick={() => choose('system')}
-      >
-        <SystemIcon />
-      </ThemeButton>
-      <ThemeButton active={mode === 'light'} label="Light theme" onClick={() => choose('light')}>
-        <SunIcon />
-      </ThemeButton>
-      <ThemeButton active={mode === 'dark'} label="Dark theme" onClick={() => choose('dark')}>
-        <MoonIcon />
-      </ThemeButton>
-    </div>
-  );
-}
+  function toggle() {
+    const next: ThemeMode = mode === 'system' ? 'light' : mode === 'light' ? 'dark' : 'system';
+    choose(next);
+  }
 
-function ThemeButton({
-  active,
-  children,
-  label,
-  onClick,
-}: {
-  active: boolean;
-  children: ReactNode;
-  label: string;
-  onClick: () => void;
-}) {
+  const title =
+    mode === 'system' ? `${label}: system` : mode === 'light' ? `${label}: light` : `${label}: dark`;
+
   return (
-    <button type="button" aria-label={label} aria-pressed={active} onClick={onClick}>
-      {children}
+    <button
+      type="button"
+      className="theme-toggle"
+      onClick={toggle}
+      aria-label={title}
+      title={title}
+      data-mode={mode}
+    >
+      {mode === 'system' ? <SystemIcon /> : mode === 'light' ? <SunIcon /> : <MoonIcon />}
     </button>
   );
 }

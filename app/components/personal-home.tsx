@@ -40,12 +40,8 @@ export function PersonalHome({ locale }: { locale: Locale }) {
                   const isLast = j === stanza.lines.length - 1;
                   return (
                     <span className="text-line" key={j}>
-                      {isLast && stanza.trailing === 'avatar' ? (
-                        <InlineAvatarLine line={line} />
-                      ) : (
-                        line
-                      )}
-                      {isLast && stanza.trailing !== 'avatar' && (
+                      {line}
+                      {isLast && (
                         <>
                           {' '}
                           <TrailingIcons kind={stanza.trailing} content={content} />
@@ -76,25 +72,6 @@ export function PersonalHome({ locale }: { locale: Locale }) {
           </div>
         </main>
       </div>
-    </>
-  );
-}
-
-function InlineAvatarLine({ line }: { line: string }) {
-  const marker = 'Karel,';
-  const index = line.indexOf(marker);
-
-  if (index === -1) {
-    return line;
-  }
-
-  return (
-    <>
-      {line.slice(0, index + marker.length)}
-      {' '}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="avatar inline-avatar" src={site.avatarUrl} alt={site.name} width={40} height={40} />
-      {line.slice(index + marker.length)}
     </>
   );
 }

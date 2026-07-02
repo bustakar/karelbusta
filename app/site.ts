@@ -21,7 +21,7 @@ export const site = {
 };
 
 export const apps = [
-  { name: 'Kinetic', icon: '/apps/kinetic.svg', href: 'https://github.com/bustakar/kinetic' },
+  { name: 'Kinetic', icon: '/apps/kinetic.png', href: 'https://github.com/bustakar/kinetic' },
 ] as const;
 
 // "my socials" — where I post regularly
