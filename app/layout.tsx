@@ -3,24 +3,39 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import type { Metadata } from 'next';
-import Footer from './components/footer';
+import { headers } from 'next/headers';
 import './global.css';
-import { baseUrl } from './sitemap';
+import { localeContent, site } from './site';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(baseUrl),
+  metadataBase: new URL(site.baseUrl),
   title: {
-    default: 'Karel Busta | Personal playground',
+    default: 'Karel Busta - AI, app development, and agentic workflows',
     template: '%s | Karel Busta',
   },
-  description: 'Personal playground.',
+  description:
+    'Karel Busta is a software engineer from Czechia creating videos and posts about AI, agentic workflows, app development, and mobile products.',
+  applicationName: 'Karel Busta',
+  authors: [{ name: 'Karel Busta', url: site.englishUrl }],
+  creator: 'Karel Busta',
+  publisher: 'Karel Busta',
+  category: 'technology',
   openGraph: {
-    title: `Karel Busta's playground.`,
-    description: `Karel Busta's personal playground.`,
-    url: baseUrl,
-    siteName: `Karel Busta's playground.`,
+    title: 'Karel Busta - AI, app development, and agentic workflows',
+    description:
+      'Software engineer from Czechia creating videos and posts about AI, agentic workflows, app development, and mobile products.',
+    url: site.englishUrl,
+    siteName: 'Karel Busta',
     locale: 'en_US',
     type: 'website',
+  },
+  alternates: {
+    canonical: site.englishUrl,
+    languages: {
+      cs: site.czechUrl,
+      en: site.englishUrl,
+      'x-default': site.englishUrl,
+    },
   },
   robots: {
     index: true,
@@ -37,27 +52,45 @@ export const metadata: Metadata = {
 
 const cx = (...classes) => classes.filter(Boolean).join(' ');
 
+const themeScript = `
+(() => {
+  try {
+    const stored = localStorage.getItem('theme-mode') || 'system';
+    const resolved = stored === 'system'
+      ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      : stored;
+    document.documentElement.dataset.theme = resolved;
+    document.documentElement.dataset.themeMode = stored;
+    document.documentElement.style.colorScheme = resolved;
+  } catch {
+    document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+})();
+`;
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const localeHeader = headers().get('x-site-locale');
+  const locale = localeHeader === 'en' ? 'en' : 'cs';
+  const htmlLang = localeContent[locale].htmlLang;
+
   return (
     <html
-      lang="en"
-      className={cx(
-        'text-black bg-white dark:text-white dark:bg-black',
-        GeistSans.variable,
-        GeistMono.variable
-      )}
+      lang={htmlLang}
+      suppressHydrationWarning
+      className={cx(GeistSans.variable, GeistMono.variable)}
     >
-      <body className="antialiased max-w-xl mx-4 mt-8 lg:mx-auto">
-        <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
-          {children}
-          <Footer />
-          <Analytics />
-          <SpeedInsights />
-        </main>
+      <head>
+        <meta name="color-scheme" content="light dark" />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="antialiased">
+        {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
