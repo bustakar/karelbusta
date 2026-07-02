@@ -5,7 +5,7 @@ export const site = {
   baseUrl: 'https://karelbusta.dev',
   czechUrl: 'https://karelbusta.cz',
   englishUrl: 'https://karelbusta.dev/en',
-  avatarUrl: 'https://github.com/bustakar.png',
+  avatarUrl: '/avatar.png',
   email: 'hello@karelbusta.dev',
   links: {
     youtube: 'https://www.youtube.com/@karelbusta',
@@ -18,12 +18,8 @@ export const site = {
   },
 };
 
-// Apps aren't on the App Store yet — icons served locally, links point at
-// landing pages. nyam is confirmed live; the other two are TODO subdomains.
 export const apps = [
-  { name: 'nyam nyam', icon: '/apps/nyam-nyam.png', href: 'https://nyam.karelbusta.dev' },
-  { name: 'yumbucha', icon: '/apps/yumbucha.png', href: 'https://yumbucha.karelbusta.dev' }, // TODO confirm
-  { name: 'pinky pact', icon: '/apps/pinky-pact.png', href: 'https://pinky.karelbusta.dev' }, // TODO confirm
+  { name: 'Kinetic', icon: '/apps/kinetic.png', href: 'https://github.com/bustakar/kinetic' },
 ] as const;
 
 // "my socials" — where I post regularly (YouTube + X)

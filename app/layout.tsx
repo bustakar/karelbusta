@@ -20,6 +20,14 @@ export const metadata: Metadata = {
   creator: 'Karel Busta',
   publisher: 'Karel Busta',
   category: 'technology',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.png', type: 'image/png' },
+      { url: '/icon.png', type: 'image/png' },
+    ],
+    apple: [{ url: '/avatar.png', type: 'image/png' }],
+  },
   openGraph: {
     title: 'Karel Busta - AI, app development, and agentic workflows',
     description:

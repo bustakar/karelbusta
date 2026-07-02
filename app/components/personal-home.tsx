@@ -153,11 +153,11 @@ function BrandLogo({ name }: { name: 'youtube' | 'x' | 'discord' }) {
   if (name === 'youtube') {
     return (
       <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect width="24" height="24" rx="5" fill="#FF0000" />
         <path
-          fill="#FF0000"
-          d="M23.5 6.2a3 3 0 0 0-2.12-2.12C19.5 3.56 12 3.56 12 3.56s-7.5 0-9.38.52A3 3 0 0 0 .5 6.2C0 8.08 0 12 0 12s0 3.92.5 5.8a3 3 0 0 0 2.12 2.12c1.88.52 9.38.52 9.38.52s7.5 0 9.38-.52A3 3 0 0 0 23.5 17.8C24 15.92 24 12 24 12s0-3.92-.5-5.8Z"
+          fill="#fff"
+          d="M9.5 7.5v9l7.4-4.5-7.4-4.5Z"
         />
-        <path fill="#fff" d="M9.6 15.6V8.4l6.2 3.6-6.2 3.6Z" />
       </svg>
     );
   }
