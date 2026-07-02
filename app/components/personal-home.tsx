@@ -38,9 +38,10 @@ export function PersonalHome({ locale }: { locale: Locale }) {
               <p className="stanza" key={i}>
                 {stanza.lines.map((line, j) => {
                   const isLast = j === stanza.lines.length - 1;
+                  const hasAvatar = isLast && stanza.trailing === 'avatar';
                   return (
-                    <span className="text-line" key={j}>
-                      {line}
+                    <span className={hasAvatar ? 'text-line avatar-line' : 'text-line'} key={j}>
+                      <span className="line-copy">{line}</span>
                       {isLast && (
                         <>
                           {' '}
