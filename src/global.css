@@ -231,20 +231,8 @@ a {
   background: #ff0000;
 }
 
-.logo-chip[title='X'],
-.logo-chip[title='TikTok'] {
+.logo-chip[title='X'] {
   background: #000000;
-}
-
-.logo-chip[title='Discord'] {
-  background: #5865f2;
-}
-
-.logo-chip[title='Instagram'] {
-  background:
-    radial-gradient(circle at 30% 105%, #fdf497 0 12%, #fd5949 33%, transparent 58%),
-    radial-gradient(circle at 30% 107%, #fd5949 0 38%, transparent 63%),
-    linear-gradient(135deg, #405de6 0%, #833ab4 36%, #c13584 58%, #e1306c 78%, #fd1d1d 100%);
 }
 
 .logo-chip img {
@@ -257,16 +245,6 @@ a {
 .logo-chip[title='YouTube'] img {
   width: 62%;
   height: 62%;
-}
-
-.logo-chip[title='Discord'] img {
-  width: 64%;
-  height: 64%;
-}
-
-.logo-chip[title='TikTok'] img {
-  width: 56%;
-  height: 56%;
 }
 
 @media (prefers-reduced-motion: no-preference) {

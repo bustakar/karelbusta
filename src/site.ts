@@ -8,10 +8,7 @@ export const site = {
   links: {
     youtube: 'https://www.youtube.com/@karelbusta',
     x: 'https://x.com/karelbusta',
-    instagram: 'https://www.instagram.com/karelbusta',
-    tiktok: 'https://www.tiktok.com/@karelbusta',
     github: 'https://github.com/bustakar',
-    discord: 'https://discord.gg/jP659hG7',
     techStack: '/stack',
     sponsor: 'mailto:hello@karelbusta.dev?subject=Sponsorship%20inquiry',
   },
@@ -21,7 +18,7 @@ export const apps = [
   {
     name: 'Kinetic',
     icon: '/apps/kinetic.png',
-    href: 'https://apps.apple.com/us/app/kinetic-workout-tracker/id6761449962',
+    href: 'https://apps.apple.com/app/id6761044285',
   },
 ] as const;
 
@@ -29,15 +26,13 @@ export const apps = [
 export const socials = [
   { key: 'youtube', href: site.links.youtube, label: 'YouTube', icon: '/logos/youtube.svg' },
   { key: 'x', href: site.links.x, label: 'X', icon: '/logos/x.svg' },
-  { key: 'instagram', href: site.links.instagram, label: 'Instagram', icon: '/logos/instagram.svg' },
-  { key: 'tiktok', href: site.links.tiktok, label: 'TikTok', icon: '/logos/tiktok.svg' },
 ] as const;
 
 export type Locale = 'cs' | 'en';
 export type PageKind = 'home' | 'stack';
 
 /** Trailing icon(s) that sit at the end of a stanza's last line. */
-export type Trailing = 'avatar' | 'socials' | 'apps' | 'discord';
+export type Trailing = 'avatar' | 'socials' | 'apps';
 
 /** A stanza: one or more soft-broken text lines, then a trailing icon slot. */
 export type Stanza = { lines: string[]; trailing: Trailing };
@@ -81,7 +76,7 @@ export const localeContent: Record<Locale, LocaleContent> = {
     seo: {
       title: 'Karel Busta',
       description:
-        'Osobní web Karla Busty, software engineera z Česka. Staví mobilní appky, sdílí praktickou práci online a vede Discord komunitu.',
+        'Osobní web Karla Busty, software engineera z Česka. Staví mobilní appky a sdílí praktickou práci online.',
     },
     intro: [
       { lines: ['Ahoj, jsem Karel, software engineer z Česka'], trailing: 'avatar' },
@@ -90,14 +85,12 @@ export const localeContent: Record<Locale, LocaleContent> = {
         trailing: 'socials',
       },
       { lines: ['Taky dělám mobilní appky'], trailing: 'apps' },
-      { lines: ['A mám Discord server, kde nonstop řešíme AI'], trailing: 'discord' },
     ],
     appsAlt: 'Moje appky',
     socialsAlt: 'Sociální sítě',
     ctas: [
       { label: 'Zajímá tě můj tech stack?', action: 'Klikni sem', href: '/stack' },
       { label: 'Chceš sponzorovat moje videa?', action: 'Klikni sem', href: site.links.sponsor },
-      { label: 'Chceš pokecat?', action: 'Přidej se na Discord', href: site.links.discord },
     ],
   },
   en: {
@@ -112,7 +105,7 @@ export const localeContent: Record<Locale, LocaleContent> = {
     seo: {
       title: 'Karel Busta',
       description:
-        'Personal website of Karel Busta, a software engineer from Czechia building mobile apps, sharing practical work online, and running a Discord community.',
+        'Personal website of Karel Busta, a software engineer from Czechia building mobile apps and sharing practical work online.',
     },
     intro: [
       { lines: ['Hi, I’m Karel, a software engineer from Czechia'], trailing: 'avatar' },
@@ -121,17 +114,12 @@ export const localeContent: Record<Locale, LocaleContent> = {
         trailing: 'socials',
       },
       { lines: ['I also build mobile apps'], trailing: 'apps' },
-      {
-        lines: ['And I run a Discord server', 'where we talk about AI nonstop'],
-        trailing: 'discord',
-      },
     ],
     appsAlt: 'My apps',
     socialsAlt: 'My socials',
     ctas: [
       { label: 'Curious about my tech stack?', action: 'Click here', href: '/en/stack' },
       { label: 'Want to sponsor my videos?', action: 'Click here', href: site.links.sponsor },
-      { label: 'Want to chat?', action: 'Join my Discord', href: site.links.discord },
     ],
   },
 };
@@ -220,10 +208,7 @@ export function personJsonLd(locale: Locale) {
         sameAs: [
           site.links.youtube,
           site.links.x,
-          site.links.instagram,
-          site.links.tiktok,
           site.links.github,
-          site.links.discord,
         ],
       },
       ...apps.map((app) => ({

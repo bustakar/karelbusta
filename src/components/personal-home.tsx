@@ -130,21 +130,7 @@ function TrailingIcons({
     );
   }
 
-  // discord
-  return (
-    <span className="cluster">
-      <a
-        href={site.links.discord}
-        className="chip logo-chip"
-        target="_blank"
-        rel="noopener noreferrer"
-        title="Discord"
-        aria-label="Discord"
-      >
-        <img src="/logos/discord.svg" alt="" width={24} height={24} />
-      </a>
-    </span>
-  );
+  return null;
 }
 
 export function Flag({ name }: { name: 'cz' | 'gb' }) {
