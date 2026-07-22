@@ -18,7 +18,7 @@ export const apps = [
   {
     name: 'Kinetic',
     icon: '/apps/kinetic.png',
-    href: 'https://apps.apple.com/app/id6761044285',
+    href: 'https://kinetic.karelbusta.dev',
   },
 ] as const;
 

@@ -15,6 +15,20 @@ This is a porfolio site template complete with a blog. Includes:
 
 https://portfolio-blog-starter.vercel.app
 
+## PostHog analytics
+
+Create a PostHog project, then copy `.env.example` to `.env.local` and replace the
+project token and host with the values from PostHog's project settings. Add the
+same variables to the production environment in Vercel:
+
+```bash
+VITE_POSTHOG_PROJECT_TOKEN=phc_your_project_token
+VITE_POSTHOG_HOST=https://us.i.posthog.com
+```
+
+The integration records anonymous pageviews, referrers, and UTM attribution.
+Autocapture and session recording are disabled.
+
 ## How to Use
 
 You can choose from one of the following two methods to use this repository:
