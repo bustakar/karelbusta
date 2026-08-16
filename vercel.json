@@ -3,5 +3,20 @@
   "framework": "vite",
   "installCommand": "bun install --frozen-lockfile",
   "buildCommand": "bun run build",
-  "outputDirectory": "dist/client"
+  "outputDirectory": "dist/client",
+  "redirects": [
+    { "source": "/en", "destination": "https://karelbusta.dev", "permanent": true }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "karelbusta.cz" }],
+      "destination": "/cs"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "www.karelbusta.cz" }],
+      "destination": "/cs"
+    }
+  ]
 }

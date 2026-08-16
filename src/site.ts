@@ -2,58 +2,36 @@ export const site = {
   name: 'Karel Busta',
   baseUrl: 'https://karelbusta.dev',
   czechUrl: 'https://karelbusta.cz',
-  englishUrl: 'https://karelbusta.dev/en',
-  avatarUrl: '/avatar.png',
+  englishUrl: 'https://karelbusta.dev',
+  avatarUrl: '/avatar.webp',
   email: 'hello@karelbusta.dev',
   links: {
     youtube: 'https://www.youtube.com/@karelbusta',
     x: 'https://x.com/karelbusta',
     github: 'https://github.com/bustakar',
-    techStack: '/stack',
-    sponsor: 'mailto:hello@karelbusta.dev?subject=Sponsorship%20inquiry',
   },
 };
 
 export const apps = [
   {
     name: 'Kinetic',
-    icon: '/apps/kinetic.png',
+    icon: '/apps/kinetic.webp',
     href: 'https://kinetic.karelbusta.dev',
   },
 ] as const;
 
 // "my socials" — where I post regularly
 export const socials = [
-  { key: 'youtube', href: site.links.youtube, label: 'YouTube', icon: '/logos/youtube.svg' },
-  { key: 'x', href: site.links.x, label: 'X', icon: '/logos/x.svg' },
+  { key: 'youtube', href: site.links.youtube, label: 'YouTube' },
+  { key: 'x', href: site.links.x, label: 'X' },
+  { key: 'github', href: site.links.github, label: 'GitHub' },
 ] as const;
 
 export type Locale = 'cs' | 'en';
-export type PageKind = 'home' | 'stack';
-
-/** Trailing icon(s) that sit at the end of a stanza's last line. */
-export type Trailing = 'avatar' | 'socials' | 'apps';
-
-/** A stanza: one or more soft-broken text lines, then a trailing icon slot. */
-export type Stanza = { lines: string[]; trailing: Trailing };
 
 type LocaleContent = {
   code: Locale;
   htmlLang: string;
-  path: string;
-  url: string;
-  switchHref: string;
-  switchFlag: 'cz' | 'gb';
-  langLabel: string;
-  themeLabel: string;
-  seo: { title: string; description: string };
-  intro: Stanza[];
-  appsAlt: string;
-  socialsAlt: string;
-  ctas: { label: string; action: string; href: string }[];
-};
-
-type StackContent = {
   path: string;
   url: string;
   switchHref: string;
@@ -67,9 +45,9 @@ export const localeContent: Record<Locale, LocaleContent> = {
   cs: {
     code: 'cs',
     htmlLang: 'cs',
-    path: '/',
+    path: '/cs',
     url: site.czechUrl,
-    switchHref: '/en',
+    switchHref: site.englishUrl,
     switchFlag: 'gb',
     langLabel: 'Přepnout do angličtiny',
     themeLabel: 'Přepnout barevný režim',
@@ -78,27 +56,13 @@ export const localeContent: Record<Locale, LocaleContent> = {
       description:
         'Osobní web Karla Busty, software engineera z Česka. Staví mobilní appky a sdílí praktickou práci online.',
     },
-    intro: [
-      { lines: ['Ahoj, jsem Karel, software engineer z Česka'], trailing: 'avatar' },
-      {
-        lines: ['Nejspíš trávím až moc času s AI', 'a pravidelně o tom postuju na sockách'],
-        trailing: 'socials',
-      },
-      { lines: ['Taky dělám mobilní appky'], trailing: 'apps' },
-    ],
-    appsAlt: 'Moje appky',
-    socialsAlt: 'Sociální sítě',
-    ctas: [
-      { label: 'Zajímá tě můj tech stack?', action: 'Klikni sem', href: '/stack' },
-      { label: 'Chceš sponzorovat moje videa?', action: 'Klikni sem', href: site.links.sponsor },
-    ],
   },
   en: {
     code: 'en',
     htmlLang: 'en',
-    path: '/en',
+    path: '/',
     url: site.englishUrl,
-    switchHref: '/',
+    switchHref: site.czechUrl,
     switchFlag: 'cz',
     langLabel: 'Switch to Czech',
     themeLabel: 'Change color theme',
@@ -106,49 +70,6 @@ export const localeContent: Record<Locale, LocaleContent> = {
       title: 'Karel Busta',
       description:
         'Personal website of Karel Busta, a software engineer from Czechia building mobile apps and sharing practical work online.',
-    },
-    intro: [
-      { lines: ['Hi, I’m Karel, a software engineer from Czechia'], trailing: 'avatar' },
-      {
-        lines: ['I probably spend too much time with AI,', 'and I post about it regularly on my socials'],
-        trailing: 'socials',
-      },
-      { lines: ['I also build mobile apps'], trailing: 'apps' },
-    ],
-    appsAlt: 'My apps',
-    socialsAlt: 'My socials',
-    ctas: [
-      { label: 'Curious about my tech stack?', action: 'Click here', href: '/en/stack' },
-      { label: 'Want to sponsor my videos?', action: 'Click here', href: site.links.sponsor },
-    ],
-  },
-};
-
-export const stackContent: Record<Locale, StackContent> = {
-  cs: {
-    path: '/stack',
-    url: `${site.czechUrl}/stack`,
-    switchHref: '/en/stack',
-    switchFlag: 'gb',
-    langLabel: 'Přepnout do angličtiny',
-    themeLabel: 'Přepnout barevný režim',
-    seo: {
-      title: site.name,
-      description:
-        'Tech stack Karla Busty: nástroje pro web, iOS, AI workflow, design a publikování.',
-    },
-  },
-  en: {
-    path: '/en/stack',
-    url: `${site.baseUrl}/en/stack`,
-    switchHref: '/stack',
-    switchFlag: 'cz',
-    langLabel: 'Switch to Czech',
-    themeLabel: 'Change color theme',
-    seo: {
-      title: site.name,
-      description:
-        'Karel Busta tech stack: tools for web, iOS, AI workflow, design, and publishing.',
     },
   },
 };
@@ -162,9 +83,9 @@ export type SeoMetadata = {
   ogImage: string;
 };
 
-export function metadataForPage(locale: Locale, page: PageKind): SeoMetadata {
-  const content = page === 'stack' ? stackContent[locale] : localeContent[locale];
-  const ogUrl = `${site.baseUrl}/og-${locale}.svg`;
+export function metadataForLocale(locale: Locale): SeoMetadata {
+  const content = localeContent[locale];
+  const ogUrl = `${site.baseUrl}/og-${locale}.png`;
 
   return {
     title: content.seo.title,
@@ -174,10 +95,6 @@ export function metadataForPage(locale: Locale, page: PageKind): SeoMetadata {
     alternateLocale: locale === 'cs' ? 'en_US' : 'cs_CZ',
     ogImage: ogUrl,
   };
-}
-
-export function metadataForLocale(locale: Locale): SeoMetadata {
-  return metadataForPage(locale, 'home');
 }
 
 export function personJsonLd(locale: Locale) {
@@ -191,7 +108,7 @@ export function personJsonLd(locale: Locale) {
         '@id': `${site.baseUrl}/#person`,
         name: site.name,
         url: content.url,
-        image: site.avatarUrl,
+        image: `${site.baseUrl}${site.avatarUrl}`,
         email: `mailto:${site.email}`,
         jobTitle: locale === 'cs' ? 'Software engineer' : 'Software Engineer',
         nationality: 'Czech',

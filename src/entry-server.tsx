@@ -1,6 +1,6 @@
 import { renderToString } from 'react-dom/server';
 import { App, routes, type Route } from './App';
-import { localeContent, metadataForPage, site, stackContent } from './site';
+import { localeContent, metadataForLocale, site } from './site';
 
 export { routes };
 
@@ -31,9 +31,9 @@ function escapeHtml(value: string) {
 
 function renderHead(route: Route, assetTags: string) {
   const content = localeContent[route.locale];
-  const metadata = metadataForPage(route.locale, route.page);
-  const alternateCs = route.page === 'stack' ? stackContent.cs.url : site.czechUrl;
-  const alternateEn = route.page === 'stack' ? stackContent.en.url : site.englishUrl;
+  const metadata = metadataForLocale(route.locale);
+  const alternateCs = site.czechUrl;
+  const alternateEn = site.englishUrl;
   const title = route.status === 404 ? `Page not found | ${site.name}` : metadata.title;
   const description =
     route.status === 404 ? 'The requested page could not be found.' : metadata.description;
@@ -56,7 +56,7 @@ function renderHead(route: Route, assetTags: string) {
     <link rel="alternate" hreflang="x-default" href="${escapeHtml(alternateEn)}" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon.png" type="image/png" />
-    <link rel="apple-touch-icon" href="/avatar.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta property="og:title" content="${escapeHtml(title)}" />
     <meta property="og:description" content="${escapeHtml(description)}" />
     <meta property="og:url" content="${escapeHtml(canonical)}" />
@@ -65,6 +65,7 @@ function renderHead(route: Route, assetTags: string) {
     <meta property="og:locale:alternate" content="${metadata.alternateLocale}" />
     <meta property="og:type" content="profile" />
     <meta property="og:image" content="${escapeHtml(metadata.ogImage)}" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="${escapeHtml(title)}" />

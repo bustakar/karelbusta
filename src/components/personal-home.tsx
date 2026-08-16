@@ -1,16 +1,17 @@
-import {
-  apps,
-  localeContent,
-  personJsonLd,
-  socials,
-  site,
-  type Locale,
-  type Trailing,
-} from '../site';
+import { useCallback, useState } from 'react';
+import { siGithub, siX, siYoutube } from 'simple-icons';
+import { KineticCard } from './kinetic-card';
+import { localeContent, personJsonLd, site, socials, type Locale } from '../site';
+import type { PublicMetrics } from '../metrics';
 import { ThemeToggle } from './theme-toggle';
 
 export function PersonalHome({ locale }: { locale: Locale }) {
   const content = localeContent[locale];
+  const [metrics, setMetrics] = useState<PublicMetrics | null>(null);
+  const receiveMetrics = useCallback((metrics: PublicMetrics) => {
+    setMetrics(metrics);
+  }, []);
+  const revenue = metrics?.summary.revenue ?? null;
 
   return (
     <>
@@ -18,152 +19,118 @@ export function PersonalHome({ locale }: { locale: Locale }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd(locale)) }}
       />
-      <div className="page">
-        <header className="controls" aria-label="Preferences">
-          <a
-            href={content.switchHref}
-            className="lang-switch"
-            aria-label={content.langLabel}
-            title={content.langLabel}
-          >
-            <Flag name={content.switchFlag} />
-          </a>
-          <ThemeToggle label={content.themeLabel} />
-        </header>
-
-        <main className="home">
-          <div className="intro">
-            {content.intro.map((stanza, i) => (
-              <p className="stanza" key={i}>
-                {stanza.lines.map((line, j) => {
-                  const isLast = j === stanza.lines.length - 1;
-                  const hasAvatar = isLast && stanza.trailing === 'avatar';
-                  return (
-                    <span className={hasAvatar ? 'text-line avatar-line' : 'text-line'} key={j}>
-                      <span className="line-copy">{line}</span>
-                      {isLast && (
-                        <>
-                          {' '}
-                          <TrailingIcons kind={stanza.trailing} content={content} />
-                        </>
-                      )}
-                    </span>
-                  );
-                })}
-              </p>
-            ))}
+      <header className="controls home-controls" aria-label={locale === 'cs' ? 'Nastavení' : 'Preferences'}>
+        <a
+          href={content.switchHref}
+          className="lang-switch"
+          aria-label={content.langLabel}
+          title={content.langLabel}
+        >
+          <Flag name={content.switchFlag} />
+        </a>
+        <ThemeToggle label={content.themeLabel} />
+      </header>
+      <main className="indie-page">
+        <aside className="profile">
+          <img
+            className="profile-photo"
+            src={site.avatarUrl}
+            alt={site.name}
+            width="240"
+            height="240"
+            fetchPriority="high"
+          />
+          <h1>{site.name}</h1>
+          <div className="profile-meta">
+            <span>
+              <LocationIcon /> {locale === 'cs' ? 'Česko' : 'Czechia'}
+            </span>
+            <span aria-label="Total revenue">
+              <RevenueIcon /> {revenue === null ? '—' : formatRevenue(revenue)}
+            </span>
           </div>
-
-          <hr className="divider" />
-
-          <div className="ctas">
-            {content.ctas.map((cta) => (
-              <p className="cta" key={cta.label}>
-                {cta.label}{' '}
-                <a
-                  href={cta.href}
-                  target={cta.href.startsWith('http') ? '_blank' : undefined}
-                  rel={cta.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                >
-                  {cta.action}
-                </a>
-              </p>
+          <nav className="social-icons" aria-label="Social links">
+            {socials.map((social) => (
+              <a
+                key={social.key}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                title={social.label}
+              >
+                <SocialIcon name={social.key} />
+              </a>
             ))}
-          </div>
-        </main>
-      </div>
+          </nav>
+        </aside>
+        <section className="projects" aria-label="Projects">
+          <KineticCard locale={locale} metrics={metrics} onMetrics={receiveMetrics} />
+        </section>
+      </main>
     </>
   );
 }
 
-function TrailingIcons({
-  kind,
-  content,
-}: {
-  kind: Trailing;
-  content: (typeof localeContent)[Locale];
-}) {
-  if (kind === 'avatar') {
-    return (
-      <img className="avatar" src={site.avatarUrl} alt={site.name} width={40} height={40} />
-    );
-  }
+function formatRevenue(value: number) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    notation: value >= 10_000 ? 'compact' : 'standard',
+    maximumFractionDigits: value >= 10_000 ? 1 : 0,
+  }).format(value);
+}
 
-  if (kind === 'apps') {
-    return (
-      <span className="cluster" role="list" aria-label={content.appsAlt}>
-        {apps.map((app) => (
-          <a
-            key={app.name}
-            href={app.href}
-            className="chip app-chip"
-            role="listitem"
-            target="_blank"
-            rel="noopener noreferrer"
-            title={app.name}
-          >
-            <img src={app.icon} alt={app.name} width={30} height={30} />
-          </a>
-        ))}
-      </span>
-    );
-  }
+function LocationIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+      <circle cx="12" cy="10" r="2.5" />
+    </svg>
+  );
+}
 
-  if (kind === 'socials') {
-    return (
-      <span className="cluster" role="list" aria-label={content.socialsAlt}>
-        {socials.map((s) => (
-          <a
-            key={s.key}
-            href={s.href}
-            className="chip logo-chip"
-            role="listitem"
-            target="_blank"
-            rel="noopener noreferrer"
-            title={s.label}
-            aria-label={s.label}
-          >
-            <img src={s.icon} alt="" width={24} height={24} />
-          </a>
-        ))}
-      </span>
-    );
-  }
+function RevenueIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="3" y="5" width="18" height="14" rx="3" />
+      <path d="M8 12h8M12 8v8" />
+    </svg>
+  );
+}
 
-  return null;
+const socialIcons = {
+  youtube: { icon: siYoutube, viewBox: '0 3 24 18' },
+  x: { icon: siX, viewBox: '2 2 20 20' },
+  github: { icon: siGithub, viewBox: '0 0 24 24' },
+};
+
+function SocialIcon({ name }: { name: keyof typeof socialIcons }) {
+  const { icon, viewBox } = socialIcons[name];
+  return (
+    <svg className={`social-icon social-icon-${name}`} viewBox={viewBox} aria-hidden="true">
+      <path d={icon.path} />
+    </svg>
+  );
 }
 
 export function Flag({ name }: { name: 'cz' | 'gb' }) {
   if (name === 'cz') {
     return (
       <svg viewBox="0 0 24 16" className="flag" aria-hidden="true">
-        <defs>
-          <clipPath id="flag-cz">
-            <rect width="24" height="16" rx="3" />
-          </clipPath>
-        </defs>
-        <g clipPath="url(#flag-cz)">
-          <rect width="24" height="8" fill="#fff" />
-          <rect y="8" width="24" height="8" fill="#D7141A" />
-          <path d="M0 0 12 8 0 16Z" fill="#11457E" />
-        </g>
+        <rect width="24" height="8" rx="3" fill="#fff" />
+        <path d="M0 8h24v5a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3Z" fill="#D7141A" />
+        <path d="M0 0 12 8 0 16Z" fill="#11457E" />
       </svg>
     );
   }
   return (
     <svg viewBox="0 0 24 16" className="flag" aria-hidden="true">
-      <defs>
-        <clipPath id="flag-gb">
-          <rect width="24" height="16" rx="3" />
-        </clipPath>
-      </defs>
-      <g clipPath="url(#flag-gb)">
-        <rect width="24" height="16" fill="#012169" />
-        <path d="M0 0 24 16M24 0 0 16" stroke="#fff" strokeWidth="3.2" />
-        <path d="M0 0 24 16M24 0 0 16" stroke="#C8102E" strokeWidth="1.6" />
-        <path d="M12 0V16M0 8H24" stroke="#fff" strokeWidth="5.2" />
-        <path d="M12 0V16M0 8H24" stroke="#C8102E" strokeWidth="3" />
-      </g>
+      <rect width="24" height="16" rx="3" fill="#012169" />
+      <path d="M0 0 24 16M24 0 0 16" stroke="#fff" strokeWidth="3.2" />
+      <path d="M0 0 24 16M24 0 0 16" stroke="#C8102E" strokeWidth="1.6" />
+      <path d="M12 0V16M0 8H24" stroke="#fff" strokeWidth="5.2" />
+      <path d="M12 0V16M0 8H24" stroke="#C8102E" strokeWidth="3" />
     </svg>
   );
 }
