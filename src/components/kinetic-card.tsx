@@ -21,6 +21,7 @@ const chartCopy = {
     users: 'Users',
     payingUsers: 'Paying',
     customers: 'Customers',
+    loading: 'Loading Kinetic metrics',
     aria: 'Kinetic revenue, users, and paying users by month',
   },
   cs: {
@@ -28,6 +29,7 @@ const chartCopy = {
     users: 'Uživatelé',
     payingUsers: 'Platící',
     customers: 'Zákazníci',
+    loading: 'Načítání metrik Kinetic',
     aria: 'Měsíční tržby, uživatelé a platící uživatelé Kinetic',
   },
 } as const;
@@ -221,7 +223,7 @@ function MetricChart({
   }, [activeSeries, countMaximum, metrics, revenueMaximum, showCounts]);
 
   return (
-    <div className="chart-wrap">
+    <div className="chart-wrap" aria-busy={!metrics?.points.length}>
       {metrics?.points.length ? (
         <>
           <Chart
@@ -253,7 +255,25 @@ function MetricChart({
             </div>
           ) : null}
         </>
-      ) : null}
+      ) : (
+        <div className="chart-placeholder" role="status" aria-label={copy.loading}>
+          <svg viewBox="0 0 640 240" preserveAspectRatio="none" aria-hidden="true">
+            <g className="placeholder-grid">
+              <line x1="0" y1="18" x2="640" y2="18" />
+              <line x1="0" y1="108" x2="640" y2="108" />
+              <line x1="0" y1="198" x2="640" y2="198" />
+            </g>
+            <path
+              className="placeholder-area"
+              d="M0 198 C90 192 120 150 205 164 S340 92 430 124 S545 68 640 92 L640 198 L0 198 Z"
+            />
+            <path
+              className="placeholder-line"
+              d="M0 198 C90 192 120 150 205 164 S340 92 430 124 S545 68 640 92"
+            />
+          </svg>
+        </div>
+      )}
     </div>
   );
 }
