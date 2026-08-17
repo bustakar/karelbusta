@@ -42,7 +42,7 @@ for (const route of routes) {
   const html = render(route, assetTags);
   const file =
     route.path === '/'
-      ? path.join(dist, 'index.html')
+      ? path.join(dist, 'en', 'index.html')
       : route.status === 404
         ? path.join(dist, '404.html')
         : path.join(dist, route.path.slice(1), 'index.html');

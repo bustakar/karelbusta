@@ -17,6 +17,7 @@
       "source": "/",
       "has": [{ "type": "host", "value": "www.karelbusta.cz" }],
       "destination": "/cs"
-    }
+    },
+    { "source": "/", "destination": "/en" }
   ]
 }
